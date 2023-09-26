@@ -23,4 +23,15 @@ class Auction
     end
     potential_revenue
   end
+
+  def bidders
+    bidders = []
+    @items.each do |item|
+
+      item.bids.each do |k, v|
+        bidders << k.name
+      end
+    end
+    bidders.uniq
+  end
 end
