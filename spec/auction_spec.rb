@@ -64,4 +64,18 @@ RSpec.describe Auction do
       expect(@auction.bidders).to eq(["Bob", "Megan", "Mike"])
     end
   end
+
+  describe '#bidder_info' do
+    it 'returns a big ol hash of bidder_info with attendees as keys' do
+      @auction.add_item(@item1) 
+      @auction.add_item(@item3)
+      @auction.add_item(@item4)
+      @item1.add_bid(@attendee2, 20)
+      @item1.add_bid(@attendee1, 22)
+      @item4.add_bid(@attendee3, 50)
+      @item3.add_bid(@attendee2, 15)
+require 'pry'; binding.pry
+      expect(@auction.bidder_info).to be_an_instance_of(Hash) 
+    end
+  end
 end
