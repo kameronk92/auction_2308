@@ -82,7 +82,7 @@ RSpec.describe Auction do
 
   describe "#close_auction" do
     it "closes the auction and reports winners" do
-      # expect().to eq()
+     expect(@auction.close_auction[@item4]).to eq(@attendee3)
     end
   end
 end

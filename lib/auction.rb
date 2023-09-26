@@ -78,14 +78,15 @@ class Auction
     bidder_info
   end
 
-  def winner(item)
-    
-  end
-
   def close_auction
     auction_results = {}
-    @items.each do |item|
-      auction_results[item] = winner(item)
+    descending_items = @items.sort_by do |item|
+      item.bids.values
     end
+
+    descending_items.each do |item|
+      auction_results[item] = item.winner
+    end
+    auction_results
   end
 end

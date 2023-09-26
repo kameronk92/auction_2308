@@ -40,4 +40,13 @@ RSpec.describe Item do
       expect(@item6.closed).to eq(true)
     end
   end
+
+  describe "#winner" do
+    it "reports the winner of the item" do
+      @item1.add_bid(@attendee2, 20)
+      @item1.add_bid(@attendee1, 25)
+
+      expect(@item1.winner).to be_a(Attendee)
+    end
+  end
 end
