@@ -9,4 +9,8 @@ class Item
   def add_bid(bidder, bid)
     @bids[bidder] = bid
   end
+
+  def current_high_bid
+    @bids.values.max
+  end
 end
