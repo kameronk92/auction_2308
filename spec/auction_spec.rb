@@ -19,6 +19,7 @@ RSpec.describe Auction do
     @item1.add_bid(@attendee2, 20)
     @item1.add_bid(@attendee1, 22)
     @item4.add_bid(@attendee3, 50)
+    @item3.add_bid(@attendee2, 100)
     @item3.add_bid(@attendee2, 15)
   end
 
@@ -68,7 +69,7 @@ RSpec.describe Auction do
     it "returns a big ol hash of bidder_info with attendees as keys" do
       expect(@auction.bidder_info).to be_an_instance_of(Hash) 
       expect(@auction.bidder_info.keys).to eq([@attendee2, @attendee1, @attendee3])
-      expect(@auction.bidder_info[@attendee1][:budget]).to eq("$50")
+      expect(@auction.bidder_info[@attendee1][:budget]).to eq(50)
     end
   end
 

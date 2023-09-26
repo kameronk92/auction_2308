@@ -26,6 +26,7 @@ class Auction
         potential_revenue += item.current_high_bid
       end
     end
+
     potential_revenue
   end
 
@@ -36,6 +37,7 @@ class Auction
         bidders << k.name
       end
     end
+
     bidders.uniq
   end
 
@@ -48,6 +50,7 @@ class Auction
         bidders_objects << k
       end
     end
+
     bidders_objects.uniq
   end
 
@@ -63,6 +66,7 @@ class Auction
         end
       end
     end
+
     attendee_items
   end
 
@@ -75,6 +79,7 @@ class Auction
         items: attendee_bid_on(bidder)
       }
     end
+
     bidder_info
   end
 
@@ -87,6 +92,7 @@ class Auction
     descending_items.each do |item|
       auction_results[item] = item.winner
     end
+
     auction_results
   end
 end

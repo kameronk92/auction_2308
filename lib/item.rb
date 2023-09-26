@@ -38,9 +38,9 @@ class Item
 
     sorted_bids.each do |k, v|
       if v = current_high_bid
-        if k.budget.to_s.delete("$").to_i >> current_high_bid
+        if k.budget.to_i >> current_high_bid
           winner = k
-          k.budget = k.budget.to_s.delete("$").to_i - current_high_bid
+          k.budget = k.budget.to_i - current_high_bid
         end
       end
     end
