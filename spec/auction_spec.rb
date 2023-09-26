@@ -60,15 +60,15 @@ RSpec.describe Auction do
 
   describe '#attendee_bid_on' do
     it 'returns an array of item objects the attendee has bid on' do
-
-      # expect().to eq()
+      expect(@auction.attendee_bid_on(@attendee2)).to eq([@item1, @item3])
     end
   end
 
   describe '#bidder_info' do
     it 'returns a big ol hash of bidder_info with attendees as keys' do
-
       expect(@auction.bidder_info).to be_an_instance_of(Hash) 
+      expect(@auction.bidder_info.keys).to eq([@attendee2, @attendee1, @attendee3])
+      expect(@auction.bidder_info[@attendee1][:budget]).to eq("$50")
     end
   end
 end
