@@ -8,4 +8,11 @@ class Auction
   def add_item(item)
     @items << item
   end
+
+  def unpopular_items
+    @items.select do |item|
+      item.bids.empty?
+    end
+  end
+
 end

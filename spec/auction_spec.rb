@@ -26,4 +26,14 @@ RSpec.describe Auction do
       @auction.add_item(@item2)
     end
   end
+
+  describe 'unpopular_items' do 
+    it "returns an array of items without bids" do 
+      @auction.add_item(@item1)
+      @auction.add_item(@item2)
+      @auction.add_item(@item3)
+      @item3.add_bid(@attendee1, 10)
+      expect(@auction.unpopular_items).to eq([@item1, @item2])
+    end
+  end
 end
