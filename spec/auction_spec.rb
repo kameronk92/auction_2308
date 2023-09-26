@@ -11,70 +11,63 @@ RSpec.describe Auction do
     @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
     @attendee3 = Attendee.new({name: 'Mike', budget: '$100'})
     @auction = Auction.new
+    @auction.add_item(@item1)
+    @auction.add_item(@item2)
+    @auction.add_item(@item3)
+    @auction.add_item(@item4)
+    @auction.add_item(@item5)
+    @item1.add_bid(@attendee2, 20)
+    @item1.add_bid(@attendee1, 22)
+    @item4.add_bid(@attendee3, 50)
+    @item3.add_bid(@attendee2, 15)
   end
 
   describe '#initialize' do
     it 'exists' do
       expect(@auction).to be_an_instance_of(Auction)
-      expect(@auction.items).to eq([])
     end
   end
 
   describe "#add_item" do
     it "adds an item to the auction" do
-      @auction.add_item(@item1)
-      @auction.add_item(@item2)
+      expect(@auction.items).to eq([@item1, @item2, @item3, @item4, @item5])
     end
   end
 
-  describe 'unpopular_items' do 
-    it "returns an array of items without bids" do 
-      @auction.add_item(@item1)
-      @auction.add_item(@item2)
-      @auction.add_item(@item3)
-      @item3.add_bid(@attendee1, 10)
-      expect(@auction.unpopular_items).to eq([@item1, @item2])
+  describe 'unpopular_items' do
+    it "returns an array of items without bids" do
+      expect(@auction.unpopular_items).to eq([@item2, @item5])
     end
   end
 
   describe "potential_revenue" do
-    it "returns an integer sum of bids" do 
-      expect(@auction.potential_revenue).to eq(0)
-      @auction.add_item(@item1) 
-      @auction.add_item(@item3)
-      @auction.add_item(@item4)
-      @item1.add_bid(@attendee2, 20)
-      @item1.add_bid(@attendee1, 22)
-      @item4.add_bid(@attendee3, 50)
-      @item3.add_bid(@attendee2, 15)
+    it "returns an integer sum of bids" do
       expect(@auction.potential_revenue).to eq(87)
     end
   end
 
   describe "#bidders" do
-    it "returns an array of bidders names as a string" do 
-      expect(@auction.bidders).to eq([])
-      @auction.add_item(@item1) 
-      @auction.add_item(@item3)
-      @auction.add_item(@item4)
-      @item1.add_bid(@attendee2, 20)
-      @item1.add_bid(@attendee1, 22)
-      @item4.add_bid(@attendee3, 50)
-      @item3.add_bid(@attendee2, 15)
+    it "returns an array of bidders names as a string" do
       expect(@auction.bidders).to eq(["Bob", "Megan", "Mike"])
+    end
+  end
+
+  describe '#bidders_objects' do
+    it 'returns an array of bidder objects' do
+      expect(@auction.bidders_objects).to eq([@attendee2, @attendee1, @attendee3])
+    end
+  end
+
+  describe '#attendee_bid_on' do
+    it 'returns an array of item objects the attendee has bid on' do
+
+      # expect().to eq()
     end
   end
 
   describe '#bidder_info' do
     it 'returns a big ol hash of bidder_info with attendees as keys' do
-      @auction.add_item(@item1) 
-      @auction.add_item(@item3)
-      @auction.add_item(@item4)
-      @item1.add_bid(@attendee2, 20)
-      @item1.add_bid(@attendee1, 22)
-      @item4.add_bid(@attendee3, 50)
-      @item3.add_bid(@attendee2, 15)
-require 'pry'; binding.pry
+
       expect(@auction.bidder_info).to be_an_instance_of(Hash) 
     end
   end

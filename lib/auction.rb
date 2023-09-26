@@ -19,7 +19,9 @@ class Auction
     potential_revenue = 0
 
     @items.each do |item|
-      potential_revenue += item.current_high_bid
+      if !item.bids.empty?
+        potential_revenue += item.current_high_bid
+      end
     end
     potential_revenue
   end
