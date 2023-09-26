@@ -1,8 +1,11 @@
+require "time"
+
 class Auction
-  attr_reader :items
+  attr_reader :items, :date
 
   def initialize
     @items = []
+    @date = Date.today.strftime("%d/%m/%Y")
   end
 
   def add_item(item)
@@ -36,6 +39,8 @@ class Auction
     bidders.uniq
   end
 
+  # this method is a carbon copy of #bidders method to return Attendee
+  # objects instead of strings, and is a helper method for #bidder_info
   def bidders_objects
     bidders_objects = []
     @items.each do |item|
@@ -46,6 +51,8 @@ class Auction
     bidders_objects.uniq
   end
 
+  # this method returns an array of items a given attendee has bid on.
+  # it is a helper for #bidder_info.
   def attendee_bid_on(attendee)
     attendee_items = []
 
@@ -63,12 +70,22 @@ class Auction
     bidder_info = {}
 
     bidders_objects.each do |bidder|
-      # require 'pry'; binding.pry
       bidder_info[bidder] = {
         budget: bidder.budget,
         items: attendee_bid_on(bidder)
       }
     end
     bidder_info
+  end
+
+  def winner(item)
+    
+  end
+
+  def close_auction
+    auction_results = {}
+    @items.each do |item|
+      auction_results[item] = winner(item)
+    end
   end
 end
